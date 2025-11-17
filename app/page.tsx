@@ -1,17 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import Menu from "../components/menu"
 import Header from "../components/header"
 import ItemContainer from "@/components/itemcontainer";
-import SubjectList from "../components/subjectlist"
+import { useState } from "react";
+import { Inter } from 'next/font/google'
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [Page, setPage] = useState<String>("Dasboard")
+
   return (
-    <div className="flex justify-center mt-2">
-      <div className="border-[2px] border-[#87CEFA] ml-10 mt-10 rounded-2xl overflow-hidden w-375 bg-[#F7F8FC]">
+    <div className={`${inter.className} flex justify-center mt-2`}>
+      <div className="border-[2px] border-[#02010d] ml-10 mt-10 rounded-4xl overflow-hidden w-375 bg-[#0d0d0d]">
       <Header />
-      <div className="flex text-[#6C6F75]">
-        <Menu />
-        <ItemContainer />
+      <div className="flex text-[#ffffff]">
+        <Menu onSelect={setPage} />
+        <ItemContainer Page={Page} />
       </div>
       </div>
     </div>
