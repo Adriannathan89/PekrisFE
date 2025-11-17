@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MatkulCard from "./matkulcard"
+import { useRouter } from "next/navigation";
 
 interface MataKuliah {
   id: number,
@@ -10,6 +11,7 @@ interface MataKuliah {
 }
 
 export default function MatkulList() {
+  const router = useRouter();
   const [data, setData] = useState<MataKuliah[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +47,7 @@ export default function MatkulList() {
         }
       </div>
       <div className="flex justify-end fixed bottom-[100px] right-[155px]">
-        <button className="w-15 h-15 border-1 border-black rounded-full bg-green-400">
+        <button className="w-15 h-15 border-1 border-black rounded-full bg-green-400" onClick={() => router.push("/addMatkul")} >
           <span className="text-white text-3xl">+</span>
         </button>
       </div>
