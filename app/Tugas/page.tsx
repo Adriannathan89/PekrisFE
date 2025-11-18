@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Menu from "../components/menu"
-import Header from "../components/header"
+import Menu from "@/components/menu"
+import Header from "@/components/header"
 import ItemContainer from "@/components/itemcontainer";
 import { useState } from "react";
 import { Inter } from 'next/font/google'
@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
       <div className="flex text-[#ffffff]">
         <Menu  />
-        <ItemContainer Page={"Dasboard"} />
+        <ItemContainer Page={"Tugas"} />
       </div>
       </div>
     </div>

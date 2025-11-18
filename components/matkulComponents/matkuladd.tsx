@@ -40,7 +40,7 @@ export default function Matkuladd() {
 
         const result = await res.json();
 
-        router.push("/");
+        router.push("/MataKuliah");
         console.log(result);
     }
 

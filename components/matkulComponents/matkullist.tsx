@@ -36,6 +36,7 @@ export default function MatkulList() {
   fetchMatkul();
   }, []);
 
+  
   if (loading) return <p className="p-4">Loading...</p>;
 
   return (

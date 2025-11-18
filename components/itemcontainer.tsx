@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import MatkulList from "./matkulComponents/matkullist";
 import TugasList from "./tugasComponents/tugaslist";

@@ -1,12 +1,12 @@
 import Button from "@/components/Button";
 import { Home, BookOpen, ClipboardList, Calculator} from "lucide-react";
 import { Space_Mono } from "next/font/google";
+import { useRouter } from "next/navigation";
 
-interface menuProps {
-  onSelect: (Page: String) => void
-}
 
-export default function Menu({ onSelect } : menuProps) {
+export default function Menu() {
+  const router = useRouter(); 
+
   return (
     <div className=" flex">
     <div className="border-r-1 py-2 border-[#A1A6B4]">
@@ -16,16 +16,16 @@ export default function Menu({ onSelect } : menuProps) {
         </div>
         <div>
           <p className="mb-2">
-            <Button onClick={() => onSelect("Dasboard")}><Home size={22} /> <span className="ml-2">Dasborad</span></Button>
+            <Button onClick={() => router.push("/")}><Home size={22} /> <span className="ml-2">Dasborad</span></Button>
           </p>
           <p className="mb-2">
-          <Button onClick={() => onSelect("Mata Kuliah")}><BookOpen size={22} />  <span className="ml-2">Mata Kuliah</span></Button>
+          <Button onClick={() => router.push("/MataKuliah")}><BookOpen size={22} />  <span className="ml-2">Mata Kuliah</span></Button>
           </p>
           <p className="mb-2">
-          <Button onClick={() => onSelect("Tugas")}><ClipboardList size={20} />   <span className="ml-2">Tugas</span></Button>
+          <Button onClick={() => router.push("/Tugas")}><ClipboardList size={20} />   <span className="ml-2">Tugas</span></Button>
           </p>
           <p className="mb-2"> 
-            <Button onClick={() => onSelect("Kalkulator Nilai")}><Calculator size={20} /> <span className="ml-2">Kalkulator Nilai</span></Button>
+            <Button onClick={() => router.push("/KalkulatorNilai")}><Calculator size={20} /> <span className="ml-2">Kalkulator Nilai</span></Button>
           </p>
         </div>
     </div>
