@@ -16,7 +16,7 @@ export default function Menu() {
         </div>
         <div>
           <p className="mb-2">
-            <Button onClick={() => router.push("/")}><Home size={22} /> <span className="ml-2">Dasborad</span></Button>
+            <Button onClick={() => router.push("/dashboard")}><Home size={22} /> <span className="ml-2">Dasborad</span></Button>
           </p>
           <p className="mb-2">
           <Button onClick={() => router.push("/MataKuliah")}><BookOpen size={22} />  <span className="ml-2">Mata Kuliah</span></Button>

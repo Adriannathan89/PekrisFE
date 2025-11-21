@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import MatkulCard from "./matkulcard"
+import MatkulCard from "./matkulcard";
 import { useRouter } from "next/navigation";
 
 interface MataKuliah {
-  id: number,
-  nama: string,
-  namaDosen: string,
-  sks: number,
-  listOfTugas: Array<Record<string, unknown>>
+  id: number;
+  nama: string;
+  namaDosen: string;
+  sks: number;
+  listOfTugas: Array<Record<string, unknown>>;
 }
 
 export default function MatkulList() {
@@ -16,43 +16,59 @@ export default function MatkulList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  async function fetchMatkul() {
-    try {
-      const res = await fetch("http://localhost:8080/api/MataKuliah", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
-      const json = (await res.json()).MataKuliah;
-      setData(json);
-    } catch (err) {
-      console.error("Fetch error:", err);
-    } finally {
-      setLoading(false);
+    async function fetchMatkul() {
+      try {
+        const res = await fetch("http://localhost:8080/api/MataKuliah", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const json = (await res.json()).MataKuliah;
+        setData(json);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  fetchMatkul();
+    fetchMatkul();
   }, []);
 
-  
-  if (loading) return <p className="p-4">Loading...</p>;
+  if (loading) return <p className="p-6">Loading...</p>;
 
   return (
-    <div>
-      <div className="flex flex-wrap gap-4 p-4">
-        {
-          data.map((Matkul) => (<MatkulCard key={Matkul.id} data={Matkul} />
-        ))
-        }
+    <div className="relative w-full h-full">
+      <div
+        className="
+          grid
+          grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+          gap-8 
+          px-10 py-6
+        "
+      >
+        {data.map((matkul) => (
+          <MatkulCard key={matkul.id} data={matkul} />
+        ))}
       </div>
-      <div className="flex justify-end fixed bottom-[100px] right-[155px]">
-        <button className="w-15 h-15 border-1 border-black rounded-full bg-green-400" onClick={() => router.push("/addMatkul")} >
-          <span className="text-white text-3xl">+</span>
-        </button>
-      </div>
+
+      <button
+        onClick={() => router.push("/addMatkul")}
+        className="
+        fixed bottom-23 right-40
+        w-14 h-14 
+        rounded-full 
+        bg-[#0CF25D] 
+        shadow-lg shadow-black/40
+        text-white text-3xl
+        flex items-center justify-center
+        transition-all duration-300
+        hover:scale-110 hover:shadow-black/60
+      "
+      >
+        +
+      </button>
     </div>
   );
-
 }

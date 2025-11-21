@@ -1,76 +1,69 @@
-import React from "react"
-import Button from "../Button"
-import { ChevronDown, ChevronUp } from "lucide-react"
+"use client";
+import React from "react";
+import { useRouter } from "next/navigation";
+import { PiBookOpenBold, PiUserBold, PiListChecks } from "react-icons/pi";
 
 interface MataKuliah {
-  id: number,
-  nama: string,
-  namaDosen: string,
-  sks: number,
-  listOfTugas: Array<Record<string, any>>
+  id: number;
+  nama: string;
+  namaDosen: string;
+  sks: number;
+  listOfTugas: Array<Record<string, any>>;
 }
 
-export default function MatkulCard({data}: {data: MataKuliah}) {
+export default function MatkulCard({ data }: { data: MataKuliah }) {
+  const router = useRouter();
+  const jumlahTugas = data.listOfTugas.length;
+  const tugas = data.listOfTugas[0];
 
-    const panjang = data.listOfTugas.length;
-    let tugasContent;
-
-    switch (panjang) {
-        case 1:
-            tugasContent = (
-                <>
-                    {data.listOfTugas.map((item, index) => (
-                        <div key={index}>
-                            <div className="flex">
-                                <div className="mt-[5px] w-[7px] h-[7px] rounded-full border-2 border-green-400"></div>
-                                <p className="ml-2">Nama: {item.nama}</p>
-                            </div>
-                            <div className="ml-[14px]">
-                                <p>Deadline: {item.deadline}</p>
-                                <p>Status: {item.status}</p>
-                            </div>
-                        </div>
-                    ))}
-                </>
-            );
-            break;
-        case 2:
-            const item = data.listOfTugas[0]
-            tugasContent = (
-                <div>
-                    <div className="flex">
-                            <div className="mt-[5px] w-[7px] h-[7px] rounded-full border-2 border-green-400"></div>
-                                <p className="ml-2">Nama: {item.nama}</p>
-                            </div>
-                    <div className="ml-[14px] mb-[7px]">
-                        <p>Deadline: {item.deadline}</p>
-                        <p>Status: {item.status}</p>
-                    </div>
-                    <button className="group flex">
-                        <span className="mr-[5px]">Selengkapnya</span> 
-                        <ChevronDown className="mt-[3px] transition-transform duration-300 group-hover:rotate-180" size={15} color="white" />
-                    </button>
-                    
-                </div>
-            );
-            break;
-
-        default:
-            tugasContent = <p>Tidak ada tugas</p>;
-    }
-
-    return (
-        <div className="flex justify-left border-1 mt-10 ml-10 w-60 h-60 rounded-xl">
-            <div className="mt-4 ml-5">
-                <p>Matkul: {data.nama}</p>
-                <p>Dosen: {data.namaDosen}</p>
-                <p>SKS: {data.sks}</p>
-
-                <div>
-                    <p className="font-semibold">Tugas:</p>
-                    {tugasContent}
-                </div>
-            </div>
+  return (
+    <div
+      onClick={() => router.push(`/MataKuliah/${data.id}`)}
+      className="
+        bg-[#1C1E22] border border-gray-700
+        w-64 p-5 rounded-xl cursor-pointer
+        transition-transform duration-300
+        hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/25
+      "
+    >
+      <div className="space-y-1">
+        <div className="flex items-center gap-2 text-blue-400">
+          <PiBookOpenBold />
+          <p className="font-semibold text-lg">{data.nama}</p>
         </div>
-    );
+
+        <div className="flex items-center gap-2 text-gray-300 text-sm">
+          <PiUserBold />
+          <p>{data.namaDosen}</p>
+        </div>
+
+        <p className="text-gray-400 text-sm">SKS: {data.sks}</p>
+      </div>
+
+      <div className="border-b border-gray-600 my-3"></div>
+
+      <div>
+        <div className="flex items-center gap-2 text-green-400 font-medium mb-2">
+          <PiListChecks />
+          <p>Tugas</p>
+        </div>
+
+        {jumlahTugas === 0 ? (
+          <p className="text-gray-500 italic text-sm">Tidak ada tugas</p>
+        ) : (
+          <div className="text-gray-300 space-y-1 text-sm">
+            <p className="text-white font-semibold">{tugas.nama}</p>
+            <p className="text-xs opacity-80">Deadline: {tugas.deadline}</p>
+            <p className="text-xs opacity-80">Status: {tugas.status}</p>
+
+            {jumlahTugas > 1 && (
+              <p className="text-blue-400 font-medium text-xs mt-2">
+                + {jumlahTugas - 1} tugas lainnya...
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

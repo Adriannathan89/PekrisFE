@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Matkuladd() {
+export default function AddMatkul() {
     const router = useRouter();
 
     const [form, setForm] = useState({
@@ -55,6 +55,7 @@ export default function Matkuladd() {
                     className="border p-2 w-80"
                     value={form.nama}
                     onChange={handleChange}
+                    required
                      />
 
                     <input
@@ -64,6 +65,7 @@ export default function Matkuladd() {
                     className="border p-2 w-80"
                     value={form.namaDosen}
                     onChange={handleChange}
+                    required
                      />
 
                     <input
@@ -73,6 +75,7 @@ export default function Matkuladd() {
                     className="border p-2 w-80"
                     value={form.deskripsi}
                     onChange={handleChange}
+                    required
                      />
 
                     <input
@@ -82,6 +85,7 @@ export default function Matkuladd() {
                     className="border p-2 w-80"
                     value={form.sks}
                     onChange={handleChange}
+                    required
                      />   
                     
                     <button 

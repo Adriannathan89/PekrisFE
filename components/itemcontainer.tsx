@@ -3,6 +3,7 @@
 import { useState } from "react";
 import MatkulList from "./matkulComponents/matkullist";
 import TugasList from "./tugasComponents/tugaslist";
+import Dasboard from "./dasboard";
 
 interface ItemContainerProps {
   Page: String;
@@ -13,7 +14,7 @@ export default function ItemContainer({ Page }: ItemContainerProps) {
   const renderPage = () => {
     switch(Page) {
       case "Dasboard":
-        return <p>dasboard</p>;
+        return <Dasboard />;
       case "Mata Kuliah":
         return <MatkulList />;
       case "Tugas":
